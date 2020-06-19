@@ -3,9 +3,7 @@ $servername = 'localhost';
 $user ='root';
 $pass = '';
 $db = 'sql_project';
-$submit=$_POST['submit'];
-$login=$_POST['login'];
-    if(isset($submit)){
+    if(isset($_POST['submit'])){
         $username=$_POST['username'];
         
         $email=$_POST['email'];
@@ -23,7 +21,7 @@ $login=$_POST['login'];
             $conn->close();
         }
     }
-    if(isset($login)){
+    if(isset($_POST['login'])){
            if(!empty($_POST['user']) && !empty($_POST['pass'])) {  
         $userlog=$_POST['userlog'];  
         $passlog=$_POST['passlog'];  
@@ -31,28 +29,21 @@ $login=$_POST['login'];
 
         $query=$conn ("SELECT * FROM login WHERE username='".$userlog."' AND password='".$passlog."'");  
         $numrows=mysqli_num_rows($query);  
-        if($numrows!=0)  
-        {  
-        while($row=mysql_fetch_assoc($query))  
-        {  
-        $dbusername=$row['username'];  
-        $dbpassword=$row['password'];  
-        }  
-
-        if($userlog == $dbusername && $passlog == $dbpassword)  
-        {  
-        session_start();  
-        $_SESSION['sess_user']=$userlog;  
-
-        header("Location: horse.php");  
-        }  
-        } else {  
-        echo "Invalid username or password!";  
-        }  
-
-        } else {  
-        echo "All fields are required!";  
-        }  
+        if($numrows!=0)  {  
+            while($row=mysqli_fetch_assoc($query)){  
+                $dbusername=$row['username'];  
+                $dbpassword=$row['password'];  
+            }  
+            if($userlog == $dbusername && $passlog == $dbpassword)  
+                {  
+                header("Location: horse.php");  
+                }  
+                else {  
+                echo "Invalid username or password!";  
+                }  
+           else {
+        echo "All fields are required!";
+        }
  }
  
 ?>
