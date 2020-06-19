@@ -17,7 +17,7 @@ $db = 'sql_project';
             $stmt =$conn-> prepare("Insert into user(username, email, password) values(?,?,?)");
             $stmt->bind_param("sss", $username, $email, $password);
             $stmt->execute();
-            header("Location: http://localhost/sql_project/SqlProject/login.php");
+            header("Location: login.php");
             $stmt->close();
             $conn->close();
         }
