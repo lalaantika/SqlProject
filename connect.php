@@ -1,14 +1,12 @@
 <?php
-$username=$_POST['username'];
-$submit=$_POST['submit'];
-$login=$_POST['login'];
-$email=$_POST['email'];
-$password=$_POST['password'];
 $servername = 'localhost';
 $user ='root';
 $pass = '';
 $db = 'sql_project';
-    if(isset($submit)){
+    if(isset($_POST['submit'])){
+        $username=$_POST['username'];
+        $email=$_POST['email'];
+        $password=$_POST['password'];
         $conn = new mysqli('localhost',$user, $pass, $db );
         if($conn-> connect_error){
             die('connection Failed : '.$conn->connect_error);
@@ -22,6 +20,4 @@ $db = 'sql_project';
             $conn->close();
         }
     }
-
- 
 ?>
