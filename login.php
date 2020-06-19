@@ -1,7 +1,5 @@
-<?php
-?>
-<h3>Login</h3>
 <form action="connect.php" method="POST">
-    User Name: <input type="text" name="username"><br />
-    Password <input type="text" name="password"><br />
+    User Name: <input type="text" name="user"><br />
+    Password <input type="text" name="pass"><br />
+    <input type="submit" value="submit data" name="login" />
 </form>
