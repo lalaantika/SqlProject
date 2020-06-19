@@ -14,7 +14,7 @@ $conn = new mysqli('localhost',$user, $pass, $db );
         $stmt =$conn-> prepare("Insert into user(username, email, password) values(?,?,?)");
         $stmt->bind_param("sss", $username, $email, $password);
         $stmt->execute();
-        echo "data uploded";
+        header("Location: http://localhost/sql_project/SqlProject/login.php");
         $stmt->close();
         $conn->close();
     }
