@@ -20,4 +20,7 @@ $db = 'sql_project';
             $conn->close();
         }
     }
+    if(isset($_POST['login'])){
+        header("Location: main.php");
+    }
 ?>
