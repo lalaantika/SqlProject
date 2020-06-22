@@ -65,11 +65,14 @@ $db = 'sql_project';
         $result = $conn->query($query);
         if ($result->num_rows > 0) {
           while($row = $result->fetch_assoc()) {
-              echo "id: " . $row["id"]. " - Name: " . $row["username"]. " " . $row["email"]. "<br>";
+              $dbusername=$row['username'];  
+              $dbuser_id=$row['user_id'];  
           }
-             header("Location: main.php");
+          session_start();
+          $_SESSION['user_id']=$dbuser_id;
+          header("Location: main.php");
         } else {
-          echo "0 results";
+          echo " Invalid username or password ";
         } 
    
         $conn->close();
