@@ -31,22 +31,47 @@ $db = 'sql_project';
         else{
             $query1 =$conn-> prepare("Insert into user(username, email, password) values(?,?,?)");
             $query1 ->bind_param("sss", $username, $email, $password);
-            $l_user_id = mysqli_insert_id($conn);
-            
-            $query2 =$conn-> prepare("Insert into horse(horse_name, horse_breed, horse_color, horse_age, skill) values(?,?,?,?,?)");
-            $query2 ->bind_param("sssis", $horse_name, $horse_breed, $horse_color, $horse_age, $horse_skill);
-            $l_horse_id = mysqli_insert_id($conn);
-            
             $query1 ->execute();
             $query1 ->close();
+            $l_user_id =$conn-> insert_id;
+            $user_id=$l_user_id;
+           
+            $query2 =$conn-> prepare("Insert into horse(horse_name, horse_breed, horse_color, horse_age, skill) values(?,?,?,?,?)");
+            $query2 ->bind_param("sssis", $horse_name, $horse_breed, $horse_color, $horse_age, $horse_skill);
             $query2 ->execute();
             $query2 ->close();
-       
+            $l_horse_id =$conn-> insert_id;
+            $horse_id=$l_horse_id;
+           
+            $query3 =$conn-> prepare("Insert into user_horse(horse_id, user_id) values(?,?)");
+            $query3 ->bind_param("ii", $horse_id, $user_id);
+            
+            $query3 ->execute();
+            $query3 ->close();
+            
             $conn->close();
             header("Location: login.php");
         }
     }
+
     if(isset($_POST['login'])){
-        header("Location: main.php");
+        $loginuser=$_POST['loginuser'];
+        $loginpass=$_POST['loginpass'];
+        $conn = new mysqli('localhost',$user, $pass, $db );
+        if($conn-> connect_error){
+            die('connection Failed : '.$conn->connect_error);
+        }
+        $query = "SELECT * from user where username='".$loginuser."'AND password='".$loginpass."'";
+        $result = $conn->query($query);
+        if ($result->num_rows > 0) {
+          while($row = $result->fetch_assoc()) {
+              echo "id: " . $row["id"]. " - Name: " . $row["username"]. " " . $row["email"]. "<br>";
+          }
+             header("Location: main.php");
+        } else {
+          echo "0 results";
+        } 
+   
+        $conn->close();
     }
 ?>
