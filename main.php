@@ -1,6 +1,7 @@
-<?php require_once("connect.php");
-echo $db;
+<?php
+    session_start();
+    echo $_SESSION['user_id'];
+    }
 ?>
- 
 
-<p>Hello ... You Made It !!!</p>
+<p>Hello ... You Made It !![]</p>
