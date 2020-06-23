@@ -7,7 +7,7 @@ require_once("connect.php");
     JOIN horse h on h.horse_id =uh.horse_id join user u on uh.user_id = u.user_id 
     where u.user_id ='".$_SESSION ['user_id']."'";
     $result = $conn->query($query);
-    echo "Horse list";
+    echo "<h3>Horse list</h3>";
     if ($result->num_rows > 0) {
       echo "<table border='1'>
       <tr>
@@ -18,8 +18,8 @@ require_once("connect.php");
       <th>Horse Age</th>
       <th>Horse Color</th>
       <th>Horse ID</th>
-      <th>Action</th>
-      <th> Action</th>
+      <th>Retire Horse</th>
+      <th> Change Horse Name</th>
       </tr>";
         while($row = $result->fetch_assoc()) {
           echo  "<tr>";
@@ -31,13 +31,13 @@ require_once("connect.php");
           echo   "<td>"  .$dbhorse_name=$row['horse_color']. "</td>";
           echo   "<td>" .$dbhorse_id=$row['horse_id']."</td>"; 
           echo   "<td>" .'<form action="" method ="POST">
-                        <input type="submit" name= "Retire" value ="Retire">
+                        <input type="submit" class="btn" name= "Retire" value ="Retire">
                         <input type ="hidden" name="horse_id" value= '. $dbhorse_id.'
                         </form>'. "</td>";
           echo    "<td>"  .'<form action="" method ="POST">
                           <input type ="hidden" name="horse_id" value='. $dbhorse_id.'
                           <input type ="text" name="horsename">
-                          <input type="submit" name= "Update" value ="Update">
+                          <input type="submit" class="btn" name= "Update" value ="Update">
                           </form>'. "</td>";
           echo "</tr>";
         }
@@ -72,9 +72,23 @@ table
 border-style:solid;
 border-width:2px;
 border-color:black;
+margin-left:20px;
 }
+
 td{
   margin:5px;
   padding:5px;
+  color:blue;
+  font-weight:bold;
 }
+
+.btn{
+  background-color:#43902F;
+  color:white;
+  width: 90px;
+  height:30px;
+  border-radius:5px;
+  border: solid white 1px;
+}
+
 </style>
