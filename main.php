@@ -30,12 +30,15 @@ require_once("connect.php");
           echo   "<td>" .$dbhorse_name=$row['horse_age']. "</td>";
           echo   "<td>"  .$dbhorse_name=$row['horse_color']. "</td>";
           echo   "<td>" .$dbhorse_id=$row['horse_id']."</td>"; 
-          echo  "<td>".'<form action="" method ="POST"><input type ="hidden" name="horse_id" value= '. $dbhorse_id.'>
-          <input type="submit" name= "Retire" value ="Retire"></form>'. "</td>";
-          echo  "<td>".'<form action="" method ="POST">
-          <input type ="hidden" name="horse_id" value='. $dbhorse_id.'>
-          <input type ="text" name="horsename">
-          <input type="submit" name= "Update" value ="Update"></form>'. "</td>";
+          echo   "<td>" .'<form action="" method ="POST">
+                        <input type="submit" name= "Retire" value ="Retire">
+                        <input type ="hidden" name="horse_id" value= '. $dbhorse_id.'
+                        </form>'. "</td>";
+          echo    "<td>"  .'<form action="" method ="POST">
+                          <input type ="hidden" name="horse_id" value='. $dbhorse_id.'
+                          <input type ="text" name="horsename">
+                          <input type="submit" name= "Update" value ="Update">
+                          </form>'. "</td>";
           echo "</tr>";
         }
         echo "</table>";
@@ -44,6 +47,7 @@ require_once("connect.php");
     $query2 = "DELETE FROM horse where horse_id ='".$_POST['horse_id']."'";
       if (mysqli_query($conn, $query2)){
        echo "Record Deleted";
+       header("Location: main.php");
       }
       else {
        echo "Error Unable to Delete Record";
@@ -53,6 +57,7 @@ require_once("connect.php");
       $query3 = "UPDATE horse SET horse_name = '".$_POST['horsename']."' WHERE horse_id ='".$_POST['horse_id']."'";
         if (mysqli_query($conn, $query3)){
          echo "Record Updated";
+         header("Location: main.php");
         }
         else {
          echo "Error Unable to Update Delete Record";
