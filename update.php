@@ -13,7 +13,7 @@ $db = 'sql_project';
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
           
-            echo "<br>";
+          echo "<br>";
           echo  $dbhorse_name=$row['horse_name'];
           echo "<br>";
           echo $dbhorse_name=$row['horse_id'];
@@ -39,6 +39,9 @@ $db = 'sql_project';
       }
 
 ?>
+<br>
+<br>
+
 
      <form  method="POST">
     hours name: <input type="text" name="hoursname"><br />
